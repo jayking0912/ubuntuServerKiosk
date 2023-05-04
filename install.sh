@@ -1,5 +1,5 @@
 #!/bin/bash
-
+sudo apt-get -y update 
 sudo add-apt-repository 'deb http://dl.google.com/linux/chrome/deb/ stable main'
 
 # Define colors
@@ -86,7 +86,7 @@ read -p "Press any key to continue... " -n1 -s
 # if [ "$ossh_installed" == 0 ]
 # then
 # apt-get -q=2 install --no-install-recommends openssh-server > /dev/null
-# wget -q https://raw.githubusercontent.com/freeyland/ubuntuServerKiosk/master/scripts/sshd_config -O /etc/ssh/sshd_config
+# wget -q https://raw.githubusercontent.com/jayking0912/ubuntuServerKiosk/master/scripts/sshd_config -O /etc/ssh/sshd_config
 # fi
 
 # read -p "Press any key to continue... ${NC}" -n1 -s
@@ -111,7 +111,7 @@ echo -e "${red}Prevent sleeping for inactivity...${NC}"
 if [ "$prevent_sleeping" == 0 ]
 then
 mkdir /etc/kbd
-wget -q https://raw.githubusercontent.com/freeyland/ubuntuServerKiosk/master/scripts/config -O /etc/kbd/config
+wget -q https://raw.githubusercontent.com/jayking0912/ubuntuServerKiosk/master/scripts/config -O /etc/kbd/config
 sed -i -e 's/prevent_sleeping=0/prevent_sleeping=1/g' stages.cfg
 echo -e "${green}Done!${NC}"
 else
@@ -156,7 +156,7 @@ if [ "$kiosk_autologin" == 0 ]
 then
 sed -i -e 's/NODM_ENABLED=false/NODM_ENABLED=true/g' /etc/default/nodm
 sed -i -e 's/NODM_USER=root/NODM_USER=kiosk/g' /etc/default/nodm
-wget -q https://raw.githubusercontent.com/freeyland/ubuntuServerKiosk/master/scripts/nodm -O /etc/init.d/nodm
+wget -q https://raw.githubusercontent.com/jayking0912/ubuntuServerKiosk/master/scripts/nodm -O /etc/init.d/nodm
 sed -i -e 's/kiosk_autologin=0/kiosk_autologin=1/g' stages.cfg
 echo -e "${green}Done!${NC}"
 else
@@ -196,10 +196,10 @@ mkdir /home/kiosk/.kiosk
 read -p "Press any key to continue..." -n1 -s
 
 # Create other kiosk scripts
-wget -q https://raw.githubusercontent.com/freeyland/ubuntuServerKiosk/master/configs/browser.cfg -O /home/kiosk/.kiosk/browser.cfg
-wget -q https://raw.githubusercontent.com/freeyland/ubuntuServerKiosk/master/scripts/killchromium.sh -O /home/kiosk/killchromium.sh
-wget -q https://raw.githubusercontent.com/freeyland/ubuntuServerKiosk/master/configs/monitrc -O /etc/monit/monitrc
-wget -q https://raw.githubusercontent.com/freeyland/ubuntuServerKiosk/master/configs/browser_switches.cfg -O /home/kiosk/.kiosk/browser_switches.cfg
+wget -q https://raw.githubusercontent.com/jayking0912/ubuntuServerKiosk/master/configs/browser.cfg -O /home/kiosk/.kiosk/browser.cfg
+wget -q https://raw.githubusercontent.com/jayking0912/ubuntuServerKiosk/master/scripts/killchromium.sh -O /home/kiosk/killchromium.sh
+wget -q https://raw.githubusercontent.com/jayking0912/ubuntuServerKiosk/master/configs/monitrc -O /etc/monit/monitrc
+wget -q https://raw.githubusercontent.com/jayking0912/ubuntuServerKiosk/master/configs/browser_switches.cfg -O /home/kiosk/.kiosk/browser_switches.cfg
 chmod 777 /home/kiosk/.kiosk/browser.cfg
 
 # Create browser killer
@@ -233,7 +233,7 @@ if [ "$audio_installed" == 0 ]
 then
 apt-get -q=2 install --no-install-recommends alsa > /dev/null
 adduser kiosk audio
-wget -q https://raw.githubusercontent.com/freeyland/ubuntuServerKiosk/master/scripts/asoundrc -O /home/kiosk/.asoundrc
+wget -q https://raw.githubusercontent.com/jayking0912/ubuntuServerKiosk/master/scripts/asoundrc -O /home/kiosk/.asoundrc
 chown kiosk.kiosk /home/kiosk/.asoundrc
 sed -i -e 's/audio_installed=0/audio_installed=1/g' stages.cfg
 echo -e "\n${green}Done!${NC}"
@@ -271,7 +271,7 @@ apt-get -q=2 install libvdpau* > /dev/null
 apt-get -q=2 install alsa-utils > /dev/null
 apt-get -q=2 install mc > /dev/null
 
-wget -q https://raw.githubusercontent.com/freeyland/ubuntuServerKiosk/master/scripts/default.pa -O /etc/pulse/default.pa
+wget -q https://raw.githubusercontent.com/jayking0912/ubuntuServerKiosk/master/scripts/default.pa -O /etc/pulse/default.pa
 sed -i -e 's/additional_software_installed=0/additional_software_installed=1/g' stages.cfg
 echo -e "${green}Done!${NC}"
 else
@@ -298,7 +298,7 @@ read -p "Press any key to continue..." -n1 -s
 #if [ "$crontab_installed" == 0 ]
 #then
 #	apt-get -q=2 install --no-install-recommends inocron > /dev/null
-#	wget -q https://raw.githubusercontent.com/freeyland/ubuntuServerKiosk/master/scripts/incron.allow -O /etc/incron.allow
+#	wget -q https://raw.githubusercontent.com/jayking0912/ubuntuServerKiosk/master/scripts/incron.allow -O /etc/incron.allow
 #	echo "/home/kiosk/.kiosk/browser.cfg IN_MODIFY sudo reboot" > incron
 #	#here we contactenate (cat) the current content from incrontab with the content of previously created incron file
 #	incrontab -l | cat - incron | incrontab -
@@ -316,7 +316,7 @@ if [ "$kiosk_permissions" == 0 ]
 then
 chown -R kiosk.kiosk /home/kiosk/
 sed -i -e 's/kiosk_permissions=0/kiosk_permissions=1/g' stages.cfg
-wget -q https://raw.githubusercontent.com/freeyland/ubuntuServerKiosk/master/scripts/sudoers -O /etc/sudoers
+wget -q https://raw.githubusercontent.com/jayking0912/ubuntuServerKiosk/master/scripts/sudoers -O /etc/sudoers
 echo -e "${green}Done!${NC}"
 else
 	echo -e "${blue}Permissions already set. Skipping...${NC}"
@@ -326,7 +326,7 @@ fi
 read -p "Press any key to continue..." -n1 -s
 
 # Create xsession
-wget -q https://raw.githubusercontent.com/freeyland/ubuntuServerKiosk/master/scripts/xsession -O /home/kiosk/.xsession
+wget -q https://raw.githubusercontent.com/jayking0912/ubuntuServerKiosk/master/scripts/xsession -O /home/kiosk/.xsession
 
 # Choose kiosk name
 kiosk_name=""
