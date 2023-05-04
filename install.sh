@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo add-apt-repository 'deb http://dl.google.com/linux/chrome/deb/ stable main'
+
 # Define colors
 red='\e[0;31m'
 green='\e[1;32m'
@@ -56,8 +58,8 @@ then
 
 # Refresh
 sudo apt-get -y update        # Fetches the list of available updates
-sudo apt-get -y dist-upgrade  # Installs updates (new ones)
-sudo apt-get -y upgrade       # Strictly upgrades the current packages
+#sudo apt-get -y dist-upgrade  # Installs updates (new ones)
+#sudo apt-get -y upgrade       # Strictly upgrades the current packages
 
 
 # Clean
@@ -80,14 +82,14 @@ apt-get -q=2 install --no-install-recommends xorg matchbox-window-manager > /dev
 apt-get -q=2 install --no-install-recommends nodm
 read -p "Press any key to continue... " -n1 -s
 
-echo -e "${red}Installing openssh...${NC}"
-if [ "$ossh_installed" == 0 ]
-then
-apt-get -q=2 install --no-install-recommends openssh-server > /dev/null
-wget -q https://raw.githubusercontent.com/freeyland/ubuntuServerKiosk/master/scripts/sshd_config -O /etc/ssh/sshd_config
-fi
+# echo -e "${red}Installing openssh...${NC}"
+# if [ "$ossh_installed" == 0 ]
+# then
+# apt-get -q=2 install --no-install-recommends openssh-server > /dev/null
+# wget -q https://raw.githubusercontent.com/freeyland/ubuntuServerKiosk/master/scripts/sshd_config -O /etc/ssh/sshd_config
+# fi
 
-read -p "Press any key to continue... ${NC}" -n1 -s
+# read -p "Press any key to continue... ${NC}" -n1 -s
 
 # Hide Cursor
 apt-get -q=2 install --no-install-recommends unclutter > /dev/null
@@ -249,15 +251,15 @@ else
 	echo -e "${blue}ImageMagick already installed. Skipping...${NC}"
 fi
 
-echo -e "${red}Installing OpenVPN...${NC}"
-if [ "$openvpn_installed" == 0 ]
-then
-apt-get -q=2 install --no-install-recommends openvpn > /dev/null
-sed -i -e 's/openvpn_installed=0/openvpn_installed=1/g' stages.cfg
-echo -e "\n${green}Done!${NC}"
-else
-	echo -e "${blue}OpenVPN already installed. Skipping...${NC}"
-fi
+# echo -e "${red}Installing OpenVPN...${NC}"
+# if [ "$openvpn_installed" == 0 ]
+# then
+# apt-get -q=2 install --no-install-recommends openvpn > /dev/null
+# sed -i -e 's/openvpn_installed=0/openvpn_installed=1/g' stages.cfg
+# echo -e "\n${green}Done!${NC}"
+# else
+# 	echo -e "${blue}OpenVPN already installed. Skipping...${NC}"
+# fi
 
 read -p "Press any key to continue..." -n1 -s
 

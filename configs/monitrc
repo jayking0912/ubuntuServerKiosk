@@ -280,11 +280,11 @@ if changed timestamp then exec "/home/kiosk/killchromium.sh"
 #       and request /some/path with content = "a string"
 #    then alert
 #
- check host dns with address 8.8.8.8
-     start program = "/etc/init.d/openvpn start"
-     stop program = "/etc/init.d/openvpn stop"
-     if failed ping then restart
-     if failed ping then exec "/home/kiosk/killchromium.sh"    
+#  check host dns with address 114.114.114.114
+#      start program = "/etc/init.d/openvpn start"
+#      stop program = "/etc/init.d/openvpn stop"
+#      if failed ping then restart
+#      if failed ping then exec "/home/kiosk/killchromium.sh"    
 #
 ## Check a network link status (up/down), link capacity changes, saturation
 ## and bandwidth usage.
